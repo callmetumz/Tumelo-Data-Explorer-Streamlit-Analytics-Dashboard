@@ -9,7 +9,7 @@ st.set_page_config(
     layout="wide"
 )
 
-st.title("🚀 Tumelo's Streamlit App🚀")
+st.title("🚀Tumelo Data Explorer: Streamlit Analytics Dashboard🚀")
 st.sidebar.header("Things to do")
 option = st.sidebar.selectbox(
     "Choose an option",
@@ -31,7 +31,7 @@ def plot_sine():
     st.pyplot(fig)
 
 if option == "Home":
-    st.header("Welcome 👋")
+    st.header("Welcome to my data visualisation app")
 
     st.write(
         """
