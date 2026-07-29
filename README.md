@@ -88,5 +88,5 @@ This project extends that learning by turning a basic Streamlit exercise into a 
 Clone the repository:
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/tumelo-streamlit-app.git
+git clone https://github.com/callmetumz/tumelo-streamlit-app.git
 cd tumelo-streamlit-app
