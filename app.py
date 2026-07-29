@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 st.set_page_config(
-    page_title="Tumelo's Streamlit App",
+    page_title="Tumelo Data Explorer: Streamlit Analytics Dashboard,
     page_icon="🚀",
     layout="wide"
 )
