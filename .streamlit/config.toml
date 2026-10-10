@@ -1,0 +1,10 @@
+# The accent colour is set separately for light and dark so the app still
+# follows the viewer's system theme.
+[theme.light]
+primaryColor = "#2a78d6"
+
+[theme.dark]
+primaryColor = "#3987e5"
+
+[browser]
+gatherUsageStats = false

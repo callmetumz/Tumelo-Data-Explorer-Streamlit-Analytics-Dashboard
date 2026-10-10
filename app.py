@@ -1,72 +1,38 @@
+"""Tumelo Data Explorer - entry point.
+
+Run with:  streamlit run app.py
+
+This file only wires the app together: page config, navigation and the
+shared sidebar. Each page lives in ``views/`` and all data work lives in the
+``data_explorer`` package.
+"""
+
 import streamlit as st
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
+
+from data_explorer import database
+from ui import components as ui
 
 st.set_page_config(
-    page_title="Tumelo Data Explorer: Streamlit Analytics Dashboard,
-    page_icon="🚀",
-    layout="wide"
+    page_title="Tumelo Data Explorer",
+    page_icon="📊",
+    layout="wide",
+    initial_sidebar_state="auto",
 )
 
-st.title("🚀Tumelo Data Explorer: Streamlit Analytics Dashboard🚀")
-st.sidebar.header("Things to do")
-option = st.sidebar.selectbox(
-    "Choose an option",
-    ["Home", "Data View", "Plot"]
+# Make sure the SQLite file and its tables exist before any page runs.
+database.init_db()
+
+navigation = st.navigation(
+    {
+        "Tumelo Data Explorer": [
+            st.Page(ui.PAGE_HOME, title="Home", icon=":material/dashboard:", default=True),
+            st.Page(ui.PAGE_DATA, title="Data View", icon=":material/table_view:"),
+            st.Page(ui.PAGE_PLOT, title="Plot", icon=":material/insert_chart:"),
+            st.Page(ui.PAGE_SQL, title="SQL Lab", icon=":material/database:"),
+        ]
+    }
 )
 
-if "count" not in st.session_state:
-    st.session_state.count = 0
-
-def plot_sine():
-    x = np.linspace(0, 10, 100)
-    y = np.sin(x)
-    fig, ax = plt.subplots()
-    ax.plot(x, y)
-    ax.set_xlabel("x")
-    ax.set_ylabel("sin(x)")
-    ax.set_title("Sine Wave")
-
-    st.pyplot(fig)
-
-if option == "Home":
-    st.header("Welcome to my data visualisation app")
-
-    st.write(
-        """
-        **Welcome to Tumelo's Streamlit application!**
-
-        This app allows you to:
-        - 📊 View and explore sample data
-        - 📈 Plot mathematical functions
-        - 🧭 Navigate between sections using the sidebar
-
-        Use the **sidebar on the left** to scroll through the available options.
-        """
-    )
-
-    name = st.text_input("Please enter your name")
-
-    if st.button("Submit"):
-        st.session_state.count += 1
-        st.success(f"Hello {name} 👋")
-
-    st.write("Button clicked:", st.session_state.count, "times")
-
-elif option == "Data View":
-    st.header("Data View")
-
-    df = pd.DataFrame(
-        np.random.randn(10, 3),
-        columns=["A", "B", "C"]
-    )
-
-    st.dataframe(df)
-
-elif option == "Plot":
-    st.header("Plot Example")
-    plot_sine()
-
-st.markdown("---")
-st.caption("Made by Tumelo ❤️")
+ui.dataset_sidebar()
+ui.show_flash()
+navigation.run()
