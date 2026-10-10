@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# Local SQLite database (created automatically on first run)
+data/*.db
+data/*.db-journal
+data/*.db-wal
+data/*.db-shm
+
+# Streamlit secrets
+.streamlit/secrets.toml
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+
+# Tool caches
+.ruff_cache/
